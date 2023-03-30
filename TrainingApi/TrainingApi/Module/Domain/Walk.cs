@@ -9,7 +9,7 @@
         public Guid WalkDifficuiltyId { get; set; }
 
         //Navigation property
-        public Region Region { get; set; }
+        public Region Region { get; set; } 
         public Walkdifficulity Walkdifficulity { get; set; }
     }
 }

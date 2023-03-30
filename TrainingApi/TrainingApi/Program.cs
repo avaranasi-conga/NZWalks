@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using TrainingApi.Data;
+using TrainingApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +13,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TrainingDBContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("TrainingApi"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("TrainingApi")); 
 });
+
+builder.Services.AddScoped<IRegionRepository, RegionRepository>();
 
 var app = builder.Build();
 
@@ -21,7 +24,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI();  
 }
 
 app.UseHttpsRedirection();
