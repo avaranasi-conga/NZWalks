@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TrainingApi.Module.Domain;
 using TrainingApi.Repositories;
@@ -11,16 +12,19 @@ namespace TrainingApi.Controllers
     {
         private readonly IRegionRepository regionRepository;
 
-        public RegionsController(IRegionRepository regionRepository)
+        private readonly IMapper mapper;
+
+        public RegionsController(IRegionRepository regionRepository,IMapper mapper)
         {
             this.regionRepository = regionRepository;
+            this.mapper = mapper;
         }
         [HttpGet]
-        public IActionResult GetAllRegions()
+        public async Task<IActionResult> GetAllRegions()
         {
-            var regions = regionRepository.GetAll();
+            var regions = await regionRepository.GetAllAsync();
 
-            var regionsDTO = new List<Module.DTO.Region>();
+           /* var regionsDTO = new List<Module.DTO.Region>();
 
             regions.ToList().ForEach(region =>
             {
@@ -33,13 +37,14 @@ namespace TrainingApi.Controllers
                     Lat = region.Lat,
                     Long = region.Long,
                     Population = region.Population,
-                     
+
                 };
 
                 regionsDTO.Add(regionDTO);
-            });
+            });*/
 
-            return Ok(regionsDTO);
+           var regionsDTO = mapper.Map<List<Module.DTO.Region>>(regions);
+           return Ok(regionsDTO);
 
         }
     }

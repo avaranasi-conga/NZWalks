@@ -1,6 +1,12 @@
-﻿namespace TrainingApi.Profiles
+﻿using AutoMapper;
+
+namespace TrainingApi.Profiles
 {
-    public class RegionProfile
+    public class RegionProfile: Profile
     {
+        public RegionProfile()
+        {
+            CreateMap<Module.Domain.Region, Module.DTO.Region>().ReverseMap();
+        }
     }
 }

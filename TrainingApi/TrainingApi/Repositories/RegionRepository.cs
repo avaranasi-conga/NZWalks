@@ -1,4 +1,5 @@
-﻿using TrainingApi.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using TrainingApi.Data;
 using TrainingApi.Module.Domain;
 
 namespace TrainingApi.Repositories
@@ -11,9 +12,9 @@ namespace TrainingApi.Repositories
         {
             this.trainingDbContext = trainingDbContext;
         }
-        public IEnumerable<Region> GetAll()
+        public async Task<IEnumerable<Region>> GetAllAsync()
         {
-            return trainingDbContext.Regions.ToList();
+            return await trainingDbContext.Regions.ToListAsync();
         }
     }
 }
