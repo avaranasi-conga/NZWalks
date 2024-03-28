@@ -66,7 +66,7 @@ namespace TrainingApi.Repositories
 
             await trainingDbContext.SaveChangesAsync();
 
-            return existingRegion;
+            return existingRegion; 
 
         }
     }
